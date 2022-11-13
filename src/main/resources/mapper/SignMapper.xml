@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.horn.energy_blockchain.Mapper.SignMapper">
+  <resultMap id="BaseResultMap" type="com.horn.energy_blockchain.Entity.Sign">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sign_code" jdbcType="VARCHAR" property="signCode" />
+    <result column="total" jdbcType="INTEGER" property="total" />
+    <result column="month" jdbcType="VARCHAR" property="month" />
+    <result column="role" jdbcType="INTEGER" property="role" />
+    <result column="admin_code" jdbcType="VARCHAR" property="adminCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, sign_code, total, month, role, admin_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sign
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sign
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.horn.energy_blockchain.Entity.Sign" useGeneratedKeys="true">
+    insert into sign (name, sign_code, total, 
+      month, role, admin_code
+      )
+    values (#{name,jdbcType=VARCHAR}, #{signCode,jdbcType=VARCHAR}, #{total,jdbcType=INTEGER}, 
+      #{month,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, #{adminCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.horn.energy_blockchain.Entity.Sign" useGeneratedKeys="true">
+    insert into sign
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="signCode != null">
+        sign_code,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="month != null">
+        month,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="adminCode != null">
+        admin_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="signCode != null">
+        #{signCode,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=INTEGER},
+      </if>
+      <if test="month != null">
+        #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=INTEGER},
+      </if>
+      <if test="adminCode != null">
+        #{adminCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.horn.energy_blockchain.Entity.Sign">
+    update sign
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="signCode != null">
+        sign_code = #{signCode,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=INTEGER},
+      </if>
+      <if test="month != null">
+        month = #{month,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        role = #{role,jdbcType=INTEGER},
+      </if>
+      <if test="adminCode != null">
+        admin_code = #{adminCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.horn.energy_blockchain.Entity.Sign">
+    update sign
+    set name = #{name,jdbcType=VARCHAR},
+      sign_code = #{signCode,jdbcType=VARCHAR},
+      total = #{total,jdbcType=INTEGER},
+      month = #{month,jdbcType=VARCHAR},
+      role = #{role,jdbcType=INTEGER},
+      admin_code = #{adminCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
